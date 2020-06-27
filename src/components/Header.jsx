@@ -1,10 +1,15 @@
 import React from 'react';
+import { connect } from 'react';
 import { Link } from 'react-router-dom';
+import gravatar from '../utils/gravatar';
 import '../assets/styles/components/Header.scss';
 import logo from '../assets/static/logo-platzi-video-BW2.png';
 import userIcon from '../assets/static/user-icon.png';
 
-const Header = () => (
+const Header = (props) => {
+const { user } = props;
+const hasUser = object.keys(user).length > 0; //cuantos elementos en un obj
+return (
   <header className="header">
 
 
@@ -14,7 +19,20 @@ const Header = () => (
 
     <div className="header__menu">
       <div className="header__menu--profile">
-        <img src={userIcon} alt="" />
+
+        {
+          hasUser ? (
+           <img src={gravatar(user.email)} alt={user.email} />
+
+          ) : (
+            <img src={userIcon} alt="User icon" />
+
+          )
+        
+
+        }
+
+        
         <p>Perfil</p>
       </div>
       <ul>
@@ -24,5 +42,13 @@ const Header = () => (
     </div>
   </header>
 );
+};
 
-export default Header;
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps, null )(Header);
