@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import gravatar from '../utils/gravatar';
 import '../assets/styles/components/Header.scss';
@@ -8,7 +8,7 @@ import userIcon from '../assets/static/user-icon.png';
 
 const Header = (props) => {
 const { user } = props;
-const hasUser = object.keys(user).length > 0; //cuantos elementos en un obj
+const hasUser = Object.keys(user).length > 0; //cuantos elementos en un obj
 return (
   <header className="header">
 
